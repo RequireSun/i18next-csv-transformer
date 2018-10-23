@@ -1,0 +1,15 @@
+{
+  "name": "i18next-csv-transformer",
+  "version": "0.0.1",
+  "bin": {
+    "i18next-csv-transformer": "./bin/cli.js"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "gulp-util": "^3.0.8",
+    "through2": "^2.0.3",
+    "vinyl": "^2.2.0",
+    "vinyl-fs": "^3.0.3"
+  }
+}
