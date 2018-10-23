@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 const vfs = require('vinyl-fs');
@@ -7,10 +9,19 @@ const transformer = require('../lib');
 
 (function () {
     program
+        .name('i18next-csv-transformer')
         .version(packageJson.version)
         .usage('[options] <file ...>')
-        // .option('-c, --config <config>', 'config file')
+        .option('--outputFileName <fileName>', 'the name of output file (.csv)')
         .option('-o, --output <path>', 'path to output');
+
+    program.on('--help', function() {
+        console.log('');
+        console.log('Examples:');
+        console.log('');
+        console.log('  $ i18next-csv-transformer --output ./dist ./src/locales/**/*.json');
+        console.log('');
+    });
 
     program.parse(process.argv);
 
@@ -35,6 +46,6 @@ const transformer = require('../lib');
     }
 
     vfs.src(src)
-        .pipe(transformer('i18n.csv'))
+        .pipe(transformer(program.outputFileName || 'i18n.csv'))
         .pipe(vfs.dest(program.output));
 }());
